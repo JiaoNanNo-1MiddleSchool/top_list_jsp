@@ -2,6 +2,8 @@
 
     5班荣誉榜单 - 简单版，其中通过扫描webapp下的榜单文件夹名字实现的
 
+    一个榜最好八个图片
+
     !author magiclu550
 
 --%>
@@ -19,13 +21,17 @@
         $(function(){
             var oul = $('.wrap ul');
             var oulHtml = oul.html();
-            oul.html(oulHtml+oulHtml)
+            oul.html(oulHtml+oulHtml);
             var timeId = null;
 
             var ali = $('.wrap ul li');
-            var aliWidth = ali.eq(0).width();
-            var aliSize = ali.size();
-            var ulWidth = aliWidth*aliSize;
+            var ulWidth = 0;
+
+            for(var index = 0;index<ali.size();index++){
+
+                ulWidth+=ali.eq(index).width();
+            }
+            var wrap = $(".wrap");
             oul.width(ulWidth);	//1600px
 
             var speed = 2;
@@ -52,12 +58,12 @@
             // setInterval()函数的作用是：每隔一段时间，执行该函数里的代码
             timeId = setInterval(slider,30);
 
-            $('.wrap').mouseover(function(){
+            wrap.mouseover(function(){
                 // clearInterval()函数的作用是用来清除定时器
                 clearInterval(timeId);
             });
 
-            $('.wrap').mouseout(function(){
+            wrap.mouseout(function(){
                 timeId = setInterval(slider,30);
             });
 
@@ -77,19 +83,28 @@
             text-align: center;
             font-size: 100px;
         }
+        #control{
+            text-align: center;
+            color: brown;
+            border: blanchedalmond 1px;
+        }
     </style>
 
 </head>
 <body>
     <!-- 头部的部分 -->
     <header>
-        <p id="title">荣誉榜</p>
+        <p id="title">5班 - 荣誉榜</p>
     </header>
     <!-- 正文部分 -->
     <article>
 
         <div class="warps">
-            <a href="javascript:" class="goLeft">向左走</a> <a href="javascript:" class="goRight">向右走</a>
+            <div id="control">
+                <a href="javascript:" class="goLeft">向左走</a>
+                <a href="javascript:" class="goRight">向右走</a>
+            </div>
+
             <%
                 String classFilePath = application.getRealPath("images");
                 File file = new File(classFilePath);
