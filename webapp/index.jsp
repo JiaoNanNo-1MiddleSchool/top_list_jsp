@@ -8,12 +8,20 @@
 
 --%>
 <%@ page import="java.io.File" %>
+<%@ page import="java.util.Properties" %>
+<%@ page import="java.io.InputStreamReader" %>
+<%@ page import="java.io.FileInputStream" %>
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="zh">
+<%
+    Properties properties = new Properties();
+    properties.load(new InputStreamReader(new FileInputStream(application.getRealPath("top.properties")),"UTF-8"));
+%>
 <head>
     <meta charset="UTF-8">
-    <title>荣耀榜单</title>
+
+    <title><%=properties.getProperty("html.head.title")%></title>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="bootstrap.min.js"></script>
     <script type="text/javascript">
@@ -94,7 +102,7 @@
 <body>
     <!-- 头部的部分 -->
     <header>
-        <p id="title">5班 - 荣誉榜</p>
+        <p id="title"><%=properties.getProperty("html.body.header.div")%></p>
     </header>
     <!-- 正文部分 -->
     <article>
@@ -104,7 +112,6 @@
                 <a href="javascript:" class="goLeft">向左走</a>
                 <a href="javascript:" class="goRight">向右走</a>
             </div>
-
             <%
                 String classFilePath = application.getRealPath("images");
                 File file = new File(classFilePath);
@@ -142,6 +149,10 @@
 
     </article>
     <!-- 脚步的部分 -->
+        @CopyRight noyark-system java server page<br>
+        @author magiclu550<br>
+        @created 30'<br>
+        源代码: https://github.com/MagicLu550/05_top_list_simple
     <footer>
 
     </footer>
