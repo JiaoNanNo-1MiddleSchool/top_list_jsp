@@ -4,6 +4,8 @@
 
     一个榜最好八个图片
 
+    将其部署到tomcat的ROOT下即可运行
+
     !author magiclu550
 
 --%>
